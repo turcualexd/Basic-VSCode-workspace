@@ -1,0 +1,70 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "Build",
+				"type": "cppbuild",
+				"command": "g++",
+				"args": [
+					"main.cpp",
+					"lib/*.cpp",
+					"-o",
+					"${workspaceFolder}/bin/main"
+				],
+				"options": {
+					"cwd": "${workspaceFolder}"
+				},
+				"problemMatcher": [
+					"$gcc"
+				],
+				"group": {
+					"kind": "build",
+					"isDefault": true
+				}
+			},
+			{
+				"label": "Build debug",
+				"type": "cppbuild",
+				"command": "g++",
+				"args": [
+					"-fdiagnostics-color=always",
+					"-g",
+					"main.cpp",
+					"lib/*.cpp",
+					"-o",
+					"${workspaceFolder}/bin/main_dbg"
+				],
+				"options": {
+					"cwd": "${workspaceFolder}"
+				},
+				"problemMatcher": [
+					"$gcc"
+				],
+				"group": "build"
+			}
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Launch GDB",
+				"type": "cppdbg",
+				"request": "launch",
+				"program": "${workspaceFolder}/bin/main_dbg",
+				"args": [],
+				"stopAtEntry": false,
+				"cwd": "${workspaceFolder}",
+				"externalConsole": false,
+				"MIMode": "gdb",
+				"preLaunchTask": "Build debug"
+			}
+		]
+	}
+}
