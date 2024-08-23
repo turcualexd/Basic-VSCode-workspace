@@ -9,21 +9,8 @@
 		"tasks": [
 			{
 				"label": "Build",
-				"type": "cppbuild",
-				"command": "g++",
-				"args": [
-					"-static",
-					"main.cpp",
-					"lib/*.cpp",
-					"-o",
-					"${workspaceFolder}/bin/main"
-				],
-				"options": {
-					"cwd": "${workspaceFolder}"
-				},
-				"problemMatcher": [
-					"$gcc"
-				],
+				"type": "shell",
+				"command": "for i in *.cpp; do g++ -static $i lib/*.cpp -o bin/${i%.*}; done",
 				"group": {
 					"kind": "build",
 					"isDefault": true
@@ -37,37 +24,18 @@
 				"args": [
 					"-fdiagnostics-color=always",
 					"-g",
-					"main.cpp",
+					"${file}",
 					"lib/*.cpp",
 					"-o",
-					"${workspaceFolder}/bin/main_dbg"
-				],
-				"options": {
-					"cwd": "${workspaceFolder}"
-				},
-				"problemMatcher": [
-					"$gcc"
+					"dbg/${fileBasenameNoExtension}_dbg"
 				],
 				"group": "build"
 			},
 
 			{
 				"label": "Build for Win64 (cross)",
-				"type": "cppbuild",
-				"command": "x86_64-w64-mingw32-g++",
-				"args": [
-					"-static",
-					"main.cpp",
-					"lib/*.cpp",
-					"-o",
-					"${workspaceFolder}/bin/main_crs.exe"
-				],
-				"options": {
-					"cwd": "${workspaceFolder}"
-				},
-				"problemMatcher": [
-					"$gcc"
-				],
+				"type": "shell",
+				"command": "for i in *.cpp; do x86_64-w64-mingw32-g++ -static $i lib/*.cpp -o bin/${i%.*}_crs; done",
 				"group": "build"
 			}
 		]
@@ -79,13 +47,11 @@
 				"name": "Launch GDB",
 				"type": "cppdbg",
 				"request": "launch",
-				"program": "${workspaceFolder}/bin/main_dbg",
-				"windows": {"program": "${workspaceFolder}/bin/main_dbg.exe"},
-				"args": [],
-				"stopAtEntry": false,
+				"program": "dbg/${fileBasenameNoExtension}_dbg",
+				"windows": {"program": "dbg/${fileBasenameNoExtension}_dbg.exe"},
 				"cwd": "${workspaceFolder}",
+				"stopAtEntry": false,
 				"externalConsole": false,
-				"MIMode": "gdb",
 				"preLaunchTask": "Build debug"
 			}
 		]
