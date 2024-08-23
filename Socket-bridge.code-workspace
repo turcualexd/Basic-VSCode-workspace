@@ -12,6 +12,7 @@
 				"type": "cppbuild",
 				"command": "g++",
 				"args": [
+					"-static",
 					"main.cpp",
 					"lib/*.cpp",
 					"-o",
@@ -28,6 +29,7 @@
 					"isDefault": true
 				}
 			},
+
 			{
 				"label": "Build debug",
 				"type": "cppbuild",
@@ -48,16 +50,17 @@
 				],
 				"group": "build"
 			},
+
 			{
-				"label": "Build for Win64",
+				"label": "Build for Win64 (cross)",
 				"type": "cppbuild",
 				"command": "x86_64-w64-mingw32-g++",
 				"args": [
-					"--static",
+					"-static",
 					"main.cpp",
 					"lib/*.cpp",
 					"-o",
-					"${workspaceFolder}/bin/main.exe"
+					"${workspaceFolder}/bin/main_crs.exe"
 				],
 				"options": {
 					"cwd": "${workspaceFolder}"
@@ -77,6 +80,7 @@
 				"type": "cppdbg",
 				"request": "launch",
 				"program": "${workspaceFolder}/bin/main_dbg",
+				"windows": {"program": "${workspaceFolder}/bin/main_dbg.exe"},
 				"args": [],
 				"stopAtEntry": false,
 				"cwd": "${workspaceFolder}",
