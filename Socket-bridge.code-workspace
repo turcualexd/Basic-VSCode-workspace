@@ -47,6 +47,25 @@
 					"$gcc"
 				],
 				"group": "build"
+			},
+			{
+				"label": "Build for Win64",
+				"type": "cppbuild",
+				"command": "x86_64-w64-mingw32-g++",
+				"args": [
+					"--static",
+					"main.cpp",
+					"lib/*.cpp",
+					"-o",
+					"${workspaceFolder}/bin/main.exe"
+				],
+				"options": {
+					"cwd": "${workspaceFolder}"
+				},
+				"problemMatcher": [
+					"$gcc"
+				],
+				"group": "build"
 			}
 		]
 	},
