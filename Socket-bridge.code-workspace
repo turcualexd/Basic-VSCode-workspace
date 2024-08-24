@@ -11,6 +11,7 @@
 				"label": "Build",
 				"type": "shell",
 				"command": "for i in *.cpp; do g++ -static $i lib/*.cpp -o bin/${i%.*}; done",
+				"windows": {"command": "foreach ($i in (Get-ChildItem *.cpp).Basename) {Invoke-expression \\\"g++.exe -static $($i).cpp lib/*.cpp -o bin/$($i).exe\\\"}"},
 				"group": {
 					"kind": "build",
 					"isDefault": true
@@ -47,8 +48,8 @@
 				"name": "Launch GDB",
 				"type": "cppdbg",
 				"request": "launch",
-				"program": "dbg/${fileBasenameNoExtension}_dbg",
-				"windows": {"program": "dbg/${fileBasenameNoExtension}_dbg.exe"},
+				"program": "${workspaceFolder}/dbg/${fileBasenameNoExtension}_dbg",
+				"windows": {"program": "${workspaceFolder}/dbg/${fileBasenameNoExtension}_dbg.exe"},
 				"cwd": "${workspaceFolder}",
 				"stopAtEntry": false,
 				"externalConsole": false,
